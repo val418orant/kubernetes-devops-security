@@ -19,4 +19,4 @@ stages:
           - script: |
               echo "Build job in build stage"
               docker -v
-              kubectl --version
+              kubectl version short
