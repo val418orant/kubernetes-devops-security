@@ -1,0 +1,19 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+  - stage: "build"
+    displayName: "Build the web application"
+    jobs:
+      - job: "build_job"
+        steps:
+          - script: |
+              echo "Build job in build stage"
