@@ -14,6 +14,9 @@ stages:
     displayName: "Build the web application"
     jobs:
       - job: "build_job"
+        displayName: "Build Job"
         steps:
           - script: |
               echo "Build job in build stage"
+              docker -v
+              kubectl -v 
