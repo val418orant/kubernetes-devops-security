@@ -17,6 +17,4 @@ stages:
         displayName: "Build Job"
         steps:
           - script: |
-              echo "Build job in build stage"
-              docker -v
-              kubectl version 
+              mvn clean package -DskipTests=true
