@@ -19,15 +19,19 @@ stages:
           - script: |
               mvn clean package -DskipTests=true
               ls -al
-          - task: PublishBuildArtifacts@1
-            inputs:
-              PathtoPublish: '$(Build.ArtifactStagingDirectory)/target/'
-              ArtifactName: 'drop'
-              publishLocation: 'Container'
-          - task: Cache@2
-            inputs:
-              key: './*'
-              path: '$(System.DefaultWorkingDirectory)/target/'
+          
+          - publish: '$(Build.ArtifactStagingDirectory)/target'
+            displayName: 'Publish target folder for later use'
+            artifact: dropScripts
+          # - task: PublishBuildArtifacts@1
+          #   inputs:
+          #     PathtoPublish: '$(Build.ArtifactStagingDirectory)/target/'
+          #     ArtifactName: 'drop'
+          #     publishLocation: 'Container'
+          # - task: Cache@2
+          #   inputs:
+          #     key: './*'
+          #     path: '$(System.DefaultWorkingDirectory)/target/'
   # - stage: "test"
   #   displayName: "test the web application"
   #   jobs:
@@ -52,12 +56,13 @@ stages:
       - job: "build_and_push"
         displayName: "build and push"
         steps:
-          - task: DownloadPipelineArtifact@2
-            inputs:
-              buildType: 'current'
-              artifactName: 'drop'
-              targetPath: '$(Pipeline.Workspace)'
-
+          # - task: DownloadPipelineArtifact@2
+          #   inputs:
+          #     buildType: 'current'
+          #     artifactName: 'drop'
+          #     targetPath: '$(Pipeline.Workspace)'
+          - download: current
+            artifact: dropScripts
           - script: |
               printenv
               echo $(Build.SourceVersion)
