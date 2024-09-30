@@ -22,7 +22,7 @@ stages:
               pwd
               ls ./target/
           
-          - publish: '$(Build.ArtifactStagingDirectory)/target'
+          - publish: '$(System.DefaultWorkingDirectory)/target'
             displayName: 'Publish target folder for later use'
             artifact: dropScripts
           # - task: PublishBuildArtifacts@1
