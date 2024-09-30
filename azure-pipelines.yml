@@ -18,6 +18,7 @@ stages:
         steps:
           - script: |
               mvn clean package -DskipTests=true
+              ls -al
           - task: PublishBuildArtifacts@1
             inputs:
               PathtoPublish: '$(Build.ArtifactStagingDirectory)/target/'
