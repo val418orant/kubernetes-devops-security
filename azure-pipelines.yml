@@ -26,3 +26,10 @@ stages:
         steps:
           - script: |
               mvn test
+      - job: "test_result"
+        displayName: "Test result for jacoco maven plugin"
+        steps:
+          - script: |
+              echo "always run this job"
+            
+            condition: always()
