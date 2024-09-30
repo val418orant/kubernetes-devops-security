@@ -18,6 +18,11 @@ stages:
         steps:
           - script: |
               mvn clean package -DskipTests=true
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)/target/'
+              ArtifactName: 'drop'
+              publishLocation: 'Container'
           - task: Cache@2
             inputs:
               key: './*'
@@ -46,6 +51,7 @@ stages:
       - job: "build_and_push"
         displayName: "build and push"
         steps:
+        
           - script: |
               printenv
               echo $(Build.SourceVersion)
