@@ -32,5 +32,11 @@ stages:
           - script: |
               echo "always run this job"
               ls /target/surefire-reports/
-            
             condition: always()
+
+          - task: PublishTestResults@2
+            inputs:
+              testResultsFormat: 'JUnit'
+              testResultsFiles: '**/target/surefire-reports/*.xml'
+            condition: always()
+          
