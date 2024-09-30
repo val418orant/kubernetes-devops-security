@@ -45,4 +45,6 @@ stages:
           - script: |
               printenv
               echo $(Build.SourceVersion)
+              docker build -t val418orant/offers:$(Build.SourceVersion) .
+              docker push val418orant/offers:$(Build.SourceVersion)
 
