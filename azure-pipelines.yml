@@ -27,7 +27,7 @@ stages:
           - task: Cache@2
             inputs:
               key: './*'
-              path: '**/target/'
+              path: '$(System.DefaultWorkingDirectory)/target/'
   # - stage: "test"
   #   displayName: "test the web application"
   #   jobs:
