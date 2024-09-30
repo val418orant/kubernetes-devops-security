@@ -51,7 +51,12 @@ stages:
       - job: "build_and_push"
         displayName: "build and push"
         steps:
-        
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              buildType: 'current'
+              artifactName: 'drop'
+              targetPath: '$(Pipeline.Workspace)'
+
           - script: |
               printenv
               echo $(Build.SourceVersion)
