@@ -63,8 +63,14 @@ stages:
           #     buildType: 'current'
           #     artifactName: 'drop'
           #     targetPath: '$(Pipeline.Workspace)'
-          - download: current
-            artifact: dropScripts
+          # - download: current
+          #   artifact: dropScripts
+          - task: DownloadBuildArtifacts@1
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'dropScripts'
+              downloadPath: '$(System.DefaultWorkingDirectory)/target'
           - script: |
               printenv
               echo $(Build.SourceVersion)
