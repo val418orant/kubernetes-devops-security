@@ -10,14 +10,14 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-  # - stage: "build"
-  #   displayName: "Build the web application"
-  #   jobs:
-  #     - job: "build_job"
-  #       displayName: "Build Job"
-  #       steps:
-  #         - script: |
-  #             mvn clean package -DskipTests=true
+  - stage: "build"
+    displayName: "Build the web application"
+    jobs:
+      - job: "build_job"
+        displayName: "Build Job"
+        steps:
+          - script: |
+              mvn clean package -DskipTests=true
   # - stage: "test"
   #   displayName: "test the web application"
   #   jobs:
