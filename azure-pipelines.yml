@@ -31,5 +31,6 @@ stages:
         steps:
           - script: |
               echo "always run this job"
+              ls /target/surefire-reports/
             
             condition: always()
