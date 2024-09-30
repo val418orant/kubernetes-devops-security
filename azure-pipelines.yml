@@ -10,36 +10,39 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-  - stage: "build"
-    displayName: "Build the web application"
-    jobs:
-      - job: "build_job"
-        displayName: "Build Job"
-        steps:
-          - script: |
-              mvn clean package -DskipTests=true
-  - stage: "test"
-    displayName: "test the web application"
-    jobs:
-      - job: "test_job"
-        displayName: "Test Job"
-        steps:
-          - script: |
-              mvn test
-      # - job: "test_result"
-      #   displayName: "Test result for jacoco maven plugin"
-      #   steps:
-      #     - script: |
-      #         echo "always run this job"
-      #         ls /target/surefire-reports/
-      #       condition: always()
+  # - stage: "build"
+  #   displayName: "Build the web application"
+  #   jobs:
+  #     - job: "build_job"
+  #       displayName: "Build Job"
+  #       steps:
+  #         - script: |
+  #             mvn clean package -DskipTests=true
+  # - stage: "test"
+  #   displayName: "test the web application"
+  #   jobs:
+  #     - job: "test_job"
+  #       displayName: "Test Job"
+  #       steps:
+  #         - script: |
+  #             mvn test
 
-          - task: PublishTestResults@2
-            inputs:
-              testResultsFormat: 'JUnit'
-              testResultsFiles: '**/target/surefire-reports/*.xml'
-            condition: always()
-          - task: PublishCodeCoverageResults@2
-            inputs:
-              summaryFileLocation: 'target/site/jacoco/jacoco.xml'
-            condition: always()
+  #         - task: PublishTestResults@2
+  #           inputs:
+  #             testResultsFormat: 'JUnit'
+  #             testResultsFiles: '**/target/surefire-reports/*.xml'
+  #           condition: always()
+  #         - task: PublishCodeCoverageResults@2
+  #           inputs:
+  #             summaryFileLocation: 'target/site/jacoco/jacoco.xml'
+  #           condition: always()
+  - stage: "Docker_build_and_push"
+    displayName: "Docker build and push"
+    jobs:
+      - job: "build_and_push"
+        displayName: "build and push"
+        steps:
+          - script: |
+              printenv
+              echo $(Build.SourceVersion)
+
