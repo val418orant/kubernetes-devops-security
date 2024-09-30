@@ -74,6 +74,7 @@ stages:
           - script: |
               printenv
               echo $(Build.SourceVersion)
+              docker login -u $(DOCKER_USERNAME) -p $(DOCKER_PAT)
               docker build -t val418orant/offers:$(Build.SourceVersion) .
               docker push val418orant/offers:$(Build.SourceVersion)
 
