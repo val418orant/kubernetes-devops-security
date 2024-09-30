@@ -18,14 +18,14 @@ stages:
         steps:
           - script: |
               mvn clean package -DskipTests=true
-  # - stage: "test"
-  #   displayName: "test the web application"
-  #   jobs:
-  #     - job: "test_job"
-  #       displayName: "Test Job"
-  #       steps:
-  #         - script: |
-  #             mvn test
+  - stage: "test"
+    displayName: "test the web application"
+    jobs:
+      - job: "test_job"
+        displayName: "Test Job"
+        steps:
+          - script: |
+              mvn test
 
   #         - task: PublishTestResults@2
   #           inputs:
