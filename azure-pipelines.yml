@@ -19,6 +19,8 @@ stages:
           - script: |
               mvn clean package -DskipTests=true
               ls -al
+              pwd
+              ls ./target/
           
           - publish: '$(Build.ArtifactStagingDirectory)/target'
             displayName: 'Publish target folder for later use'
