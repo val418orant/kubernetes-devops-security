@@ -39,4 +39,7 @@ stages:
               testResultsFormat: 'JUnit'
               testResultsFiles: '**/target/surefire-reports/*.xml'
             condition: always()
-          
+          - task: PublishCodeCoverageResults@2
+            inputs:
+              summaryFileLocation: 'target/site/jacoco/jacoco.xml'
+            condition: always()
