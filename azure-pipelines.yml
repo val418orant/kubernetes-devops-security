@@ -20,7 +20,7 @@ stages:
               mvn clean package -DskipTests=true
           - task: Cache@2
             inputs:
-              key: '*'
+              key: './*'
               path: '**/target/'
   # - stage: "test"
   #   displayName: "test the web application"
