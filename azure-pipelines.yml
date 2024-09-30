@@ -18,10 +18,10 @@ stages:
         steps:
           - script: |
               mvn clean package -DskipTests=true
-              printenv
-              echo $(Build.SourceVersion)
-              docker build -t val418orant/offers:$(Build.SourceVersion) .
-              docker push val418orant/offers:$(Build.SourceVersion)
+          - task: Cache@2
+            inputs:
+              key: '*'
+              path: '**/target/'
   # - stage: "test"
   #   displayName: "test the web application"
   #   jobs:
@@ -40,15 +40,15 @@ stages:
   #           inputs:
   #             summaryFileLocation: 'target/site/jacoco/jacoco.xml'
   #           condition: always()
-  # - stage: "Docker_build_and_push"
-  #   displayName: "Docker build and push"
-  #   jobs:
-  #     - job: "build_and_push"
-  #       displayName: "build and push"
-  #       steps:
-  #         - script: |
-  #             printenv
-  #             echo $(Build.SourceVersion)
-  #             docker build -t val418orant/offers:$(Build.SourceVersion) .
-  #             docker push val418orant/offers:$(Build.SourceVersion)
+  - stage: "Docker_build_and_push"
+    displayName: "Docker build and push"
+    jobs:
+      - job: "build_and_push"
+        displayName: "build and push"
+        steps:
+          - script: |
+              printenv
+              echo $(Build.SourceVersion)
+              docker build -t val418orant/offers:$(Build.SourceVersion) .
+              docker push val418orant/offers:$(Build.SourceVersion)
 
