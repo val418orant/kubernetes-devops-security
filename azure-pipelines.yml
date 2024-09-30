@@ -26,13 +26,13 @@ stages:
         steps:
           - script: |
               mvn test
-      - job: "test_result"
-        displayName: "Test result for jacoco maven plugin"
-        steps:
-          - script: |
-              echo "always run this job"
-              ls /target/surefire-reports/
-            condition: always()
+      # - job: "test_result"
+      #   displayName: "Test result for jacoco maven plugin"
+      #   steps:
+      #     - script: |
+      #         echo "always run this job"
+      #         ls /target/surefire-reports/
+      #       condition: always()
 
           - task: PublishTestResults@2
             inputs:
