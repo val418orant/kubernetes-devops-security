@@ -25,6 +25,7 @@ stages:
           - publish: '$(System.DefaultWorkingDirectory)/target'
             displayName: 'Publish target folder for later use'
             artifact: dropScripts
+            # tried to implement caching in between stage.
           # - task: PublishBuildArtifacts@1
           #   inputs:
           #     PathtoPublish: '$(Build.ArtifactStagingDirectory)/target/'
@@ -52,6 +53,21 @@ stages:
   #           inputs:
   #             summaryFileLocation: 'target/site/jacoco/jacoco.xml'
   #           condition: always()
+  - stage: Sonar_qube_SAST
+    displayName: sonar qube SAST
+    jobs:
+      - job: "sonar_qube_sast"
+        displayName: sonar_qube_sast
+        steps: # need to check the connection string... not tested yet.
+      
+          - script: |
+              echo "sonar qube sast test"
+              mvn clean verify sonar:sonar \
+              -Dsonar.projectKey=SonarQubeDockerDemo \
+              -Dsonar.host.url=http://localhost:9001 \
+              -Dsonar.login=sqp_9fcc11d4b0d851fe988eecb43535307b0d5a65ed
+
+
   - stage: "Docker_build_and_push"
     displayName: "Docker build and push"
     jobs:
